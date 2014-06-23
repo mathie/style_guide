@@ -1,0 +1,7 @@
+{
+  "name":        "style_guide",
+  "version":     "0.1.0",
+  "description": "My simple CSS style guide.",
+  "author":      "Graeme Mathieson <mathie@woss.name> (http://woss.name/)",
+  "homepage":    "https://github.com/mathie/style_guide"
+}
