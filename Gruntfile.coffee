@@ -11,6 +11,16 @@ module.exports = (grunt) ->
         files:
           "public/assets/stylesheets/application.css": "app/assets/stylesheets/application.less"
 
+    coffee:
+      development:
+        files: [
+          expand: true,
+          cwd: 'app/assets/javascripts'
+          src: [ '**/*.coffee' ]
+          dest: 'build/javascripts'
+          ext: '.js'
+        ]
+
     # Watch source files for changes and rebuild the associated assets
     watch:
       options:
@@ -26,6 +36,16 @@ module.exports = (grunt) ->
           "bower_components/**/*.less"
         ]
         tasks: [ "less" ]
+      coffee:
+        files: [
+          "app/assets/javascripts/**/*.coffee"
+        ]
+        tasks: [ "coffee" ]
 
   grunt.loadNpmTasks('grunt-contrib-less')
   grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-contrib-coffee')
+
+  grunt.registerTask "default", [ "build" ]
+  grunt.registerTask "build", [ "less", "coffee" ]
+  grunt.registerTask "dev", [ "build", "watch" ]
