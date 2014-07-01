@@ -42,10 +42,17 @@ module.exports = (grunt) ->
         ]
         tasks: [ "coffee" ]
 
+    clean:
+      assets:
+        src: [ "public/assets" ]
+      build:
+        src: [ "build" ]
+
   grunt.loadNpmTasks('grunt-contrib-less')
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-contrib-coffee')
+  grunt.loadNpmTasks('grunt-contrib-clean')
 
   grunt.registerTask "default", [ "build" ]
-  grunt.registerTask "build", [ "less", "coffee" ]
+  grunt.registerTask "build", [ "clean", "less", "coffee" ]
   grunt.registerTask "dev", [ "build", "watch" ]
