@@ -3,6 +3,20 @@ module.exports = (grunt) ->
     # Import package metadata from package.json, just in case it's useful.
     pkg: grunt.file.readJSON('package.json')
 
+    mkdir:
+      options:
+        mode: '0755'
+      build:
+        options:
+          create: [ 'build' ]
+      assets:
+        options:
+          create: [
+            'public/assets/stylesheets',
+            'public/assets/javascripts',
+            'public/assets/images',
+          ]
+
     # less tasks for converting less source to CSS.
     less:
       options:
@@ -19,6 +33,15 @@ module.exports = (grunt) ->
           src: [ '**/*.coffee' ]
           dest: 'build/javascripts'
           ext: '.js'
+        ]
+
+    imagemin:
+      development:
+        files: [
+          expand: true
+          cwd: 'app/assets/images'
+          src: [ '**/*.{jpg,png,gif}' ]
+          dest: 'public/assets/images'
         ]
 
     # Watch source files for changes and rebuild the associated assets
@@ -41,6 +64,11 @@ module.exports = (grunt) ->
           "app/assets/javascripts/**/*.coffee"
         ]
         tasks: [ "coffee" ]
+      images:
+        files: [
+          "app/assets/images/**/*.{jpg,png,gif}"
+        ]
+        tasks: [ "imagemin" ]
 
     clean:
       assets:
@@ -52,7 +80,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-contrib-imagemin')
+  grunt.loadNpmTasks('grunt-mkdir')
 
   grunt.registerTask "default", [ "build" ]
-  grunt.registerTask "build", [ "clean", "less", "coffee" ]
-  grunt.registerTask "dev", [ "build", "watch" ]
+  grunt.registerTask "build", [ "mkdir", "imagemin", "less", "coffee" ]
+  grunt.registerTask "dev", [ "clean", "build", "watch" ]
