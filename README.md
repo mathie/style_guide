@@ -516,6 +516,16 @@ I’ve configured it inside `initConfig()` with the following:
 
 It takes the compiled coffee script code, and the distribution files from the bower components, then produces the final application.js and its associated map file. It’s enough that I get working JS in the browser, and I get a reference back to my source file on errors in the browser, so I’m content with that for now.
 
+I've also modified my generic tasks, since it now takes a couple of tasks to generate the final JS code:
+
+```coffeescript
+grunt.registerTask "js", [ "coffee", "uglify" ]
+grunt.registerTask "css", [ "less" ]
+grunt.registerTask "build", [ "mkdir", "imagemin", "css", "js" ]
+```
+
+and modified the watcher's tasks to use them, too.
+
 ## Summary
 
 Perhaps I started out by asking for too much in the first place, but this seemed harder than it needed to be! Still, I have a build pipeline which takes version third party dependencies for CSS, images, and JavaScript, along with my own styles, CoffeeScript, and images, and it pushes them into the browser. I’m reasonably confident I can continue to work with the pipeline, adding new components as I need them. At some point I’d like to figure out proper dependency management for the JS side (like CommonJS or RequireJS or some equivalent) so I can declare the dependencies where they’re required rather than carefully ordering the build. But it’ll keep me going for now.
