@@ -1,16 +1,35 @@
-// Pull in the minimal bits of Bootstrap I need right now:
-
-// Core variables and mixins
-@import 'bootstrap/less/mixins.less';
-@import 'bootstrap/less/variables.less';
-
-// Bootstrap reset
-@import 'bootstrap/less/normalize.less';
-@import 'bootstrap/less/print.less';
-
-// Core CSS
-@import 'bootstrap/less/scaffolding.less';
-@import 'bootstrap/less/type.less';
+// Pull in all of Bootstrap.
+@import 'bootstrap/less/bootstrap.less';
 
 // Customise some of the bootstrap variables.
 @import 'variables.less';
+
+// Setup some HTML5 defaults.
+.figures {
+  .make-row();
+
+  figure {
+    .make-sm-column(6);
+    .make-md-column(4);
+
+    .thumbnail;
+
+    figcaption {
+      .caption;
+    }
+  }
+}
+
+article {
+  .container;
+}
+
+nav {
+  .navbar;
+  .navbar-inverse;
+  .navbar-fixed-top;
+}
+
+header {
+  .page-header;
+}

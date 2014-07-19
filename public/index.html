@@ -9,14 +9,65 @@
     <link href="/assets/stylesheets/application.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Style Guide</h1>
+    <p class="sr-only"><a href="#main-content">Skip to main content</a></p>
 
-    <p>Welcome to my style guide.</p>
+    <nav role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" class="navbar-brand">Style Guide</a>
+        </div>
 
-    <figure>
-      <img src="/assets/images/avatar.jpg" alt="Graeme Mathieson (@mathie) avatar">
-      <figcaption>My regular avatar, used on Twitter, Facebook and Gravatar.</figcaption>
-    </figure>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <article id="main-content">
+      <header>
+        <hgroup>
+          <h1>Style Guide <small>Welcome to my style guide.</small></h1>
+        </hgroup>
+      </header>
+
+      <div class="figures">
+        <figure>
+          <img src="/assets/images/avatar.jpg" alt="Graeme Mathieson (@mathie) avatar">
+          <figcaption>
+            <h3>My Avatar</h3>
+
+            <p>My regular avatar, used on Twitter, Facebook and Gravatar.</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img src="/assets/images/avatar.jpg" alt="Graeme Mathieson (@mathie) avatar">
+          <figcaption>
+            <h3>My Avatar</h3>
+
+            <p>My regular avatar, used on Twitter, Facebook and Gravatar.</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img src="/assets/images/avatar.jpg" alt="Graeme Mathieson (@mathie) avatar">
+          <figcaption>
+            <h3>My Avatar</h3>
+
+            <p>My regular avatar, used on Twitter, Facebook and Gravatar.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
 
     <script src="/assets/javascripts/application.js"></script>
   </body>
