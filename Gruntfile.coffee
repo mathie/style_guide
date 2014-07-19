@@ -26,14 +26,26 @@ module.exports = (grunt) ->
           "public/assets/stylesheets/application.css": "app/assets/stylesheets/application.less"
 
     coffee:
+      options:
+        sourceMap: true
+        joinExt: '.coffee'
       development:
-        files: [
-          expand: true,
-          cwd: 'app/assets/javascripts'
-          src: [ '**/*.coffee' ]
-          dest: 'build/javascripts'
-          ext: '.js'
-        ]
+        files:
+          'build/javascripts/application.js': [
+            'app/assets/javascripts/**/*.coffee'
+          ]
+
+    uglify:
+      options:
+        sourceMap: true
+        sourceMapIn: 'build/javascripts/application.js.map'
+      development:
+        files:
+          'public/assets/javascripts/application.js': [
+            'bower_components/jquery/dist/jquery.js',
+            'bower_components/bootstrap/dist/bootstrap.js',
+            'build/javascripts/application.js'
+          ]
 
     imagemin:
       development:
@@ -58,12 +70,12 @@ module.exports = (grunt) ->
           "app/assets/stylesheets/**/*.less",
           "bower_components/**/*.less"
         ]
-        tasks: [ "less" ]
+        tasks: [ "css" ]
       coffee:
         files: [
           "app/assets/javascripts/**/*.coffee"
         ]
-        tasks: [ "coffee" ]
+        tasks: [ "js" ]
       images:
         files: [
           "app/assets/images/**/*.{jpg,png,gif}"
@@ -81,8 +93,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-imagemin')
+  grunt.loadNpmTasks('grunt-contrib-uglify')
   grunt.loadNpmTasks('grunt-mkdir')
 
   grunt.registerTask "default", [ "build" ]
-  grunt.registerTask "build", [ "mkdir", "imagemin", "less", "coffee" ]
+  grunt.registerTask "js", [ "coffee", "uglify" ]
+  grunt.registerTask "css", [ "less" ]
+  grunt.registerTask "build", [ "mkdir", "imagemin", "css", "js" ]
   grunt.registerTask "dev", [ "clean", "build", "watch" ]
